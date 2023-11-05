@@ -72,7 +72,7 @@ namespace Rock_Paper_Scissors
                 round++;
                 labelRound.Text = $"Раунд № {round}";
                 Random random = new Random();
-                int indexGesture = random.Next(0, 3);
+                int indexGesture = random.Next(3);
                 string playerGesture = listGesture.Text;
                 string botGesture = gestures[indexGesture];
                 botImg.Image = imageList1.Images[GetIndex(botGesture)];
@@ -82,53 +82,44 @@ namespace Rock_Paper_Scissors
                     case "Камень":
                         if (botGesture == "Камень")
                         {
-                            labelMessage.Text = "Ничья, раунд не считается";
-                            round--;
+                            Draw();
                         }
                         if (botGesture == "Бумага")
                         {
-                            labelMessage.Text = "Балл компьютеру :(";
-                            botScore++;
+                            Lose();
                         }
                         if (botGesture == "Ножницы")
                         {
-                            labelMessage.Text = "Балл вам :)";
-                            playerScore++;
+                            Win();
                         }
                         break;
 
                     case "Ножницы":
                         if (botGesture == "Ножницы")
                         {
-                            labelMessage.Text = "Ничья, раунд не считается";
-                            round--;
+                            Draw();
                         }
                         if (botGesture == "Камень")
                         {
-                            labelMessage.Text = "Балл компьютеру :(";
-                            botScore++;
+                            Lose();
                         }
                         if (botGesture == "Бумага")
                         {
-                            labelMessage.Text = "Балл вам :)";
-                            playerScore++;
+                            Win();
                         }
                         break;
                     case "Бумага":
                         if (botGesture == "Бумага")
                         {
-                            labelMessage.Text = "Ничья, раунд не считается";
-                            round--;
+                            Draw();
                         }
                         if (botGesture == "Ножницы")
                         {
-                            labelMessage.Text = "Балл компьютеру :(";
-                            botScore++;
+                            Lose();
                         }
                         if (botGesture == "Камень")
                         {
-                            labelMessage.Text = "Балл вам :)";
-                            playerScore++;
+                            Win();
                         }
                         break;
                 }
@@ -146,6 +137,21 @@ namespace Rock_Paper_Scissors
                     MessageBox.Show("К сожалению вы проиграли. Повезёт в другой раз!");
                 else
                     MessageBox.Show("Победила дружба!");
+            }
+            void Draw()
+            {
+                labelMessage.Text = "Ничья, раунд не считается";
+                round--;
+            }
+            void Win()
+            {
+                labelMessage.Text = "Балл вам :)";
+                playerScore++;
+            }
+            void Lose()
+            {
+                labelMessage.Text = "Балл компьютеру :(";
+                botScore++;
             }
         }
     }
